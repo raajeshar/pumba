@@ -384,6 +384,12 @@ To run all Pumba tests and generate coverage report run the following command:
 docker run --rm -v "$PWD":/go/src/github.com/gaia-adm/pumba -w /go/src/github.com/gaia-adm/pumba pumba/builder script/coverage.sh --html
 ```
 
+### Build with Docker 17.05+ multistage build
+
+```
+$ docker build -t pumba --build-arg GH_SHA=$(git rev-parse HEAD) --build-arg GH_USER=gaia-adm --build-arg GH_PROJECT=pumba -f Dockerfile.ms .
+```
+
 ## Used Libraries and Code
 
 - Official Docker API for Go [docker/docker](https://github.com/docker/docker)
