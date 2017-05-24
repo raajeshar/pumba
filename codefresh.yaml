@@ -7,7 +7,7 @@ steps:
     description: create Pumba with multi-stage build
     dockerfile: Dockerfile.ms
     working-directory: ${{main_clone}}
-    image-name: pumba/builder
+    image-name: gaiaadm/pumba
     build_arguments:
       - GH_USER=gaia-adm
       - GH_PROJECT=pumba
