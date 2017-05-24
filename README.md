@@ -386,7 +386,7 @@ docker run --rm -v "$PWD":/go/src/github.com/gaia-adm/pumba -w /go/src/github.co
 
 ### Build with Docker 17.05+ multistage build
 
-```
+```sh
 $ docker build -t pumba --build-arg GH_SHA=$(git rev-parse HEAD) --build-arg GH_USER=gaia-adm --build-arg GH_PROJECT=pumba -f Dockerfile.ms .
 ```
 
