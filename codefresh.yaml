@@ -2,28 +2,13 @@ version: '1.0'
 
 steps:
 
-  go_builder:
+  multistage-build:
     type: build
-    description: create Pumba Go builder image (Go, tools, and libraries)
-    dockerfile: Dockerfile.build
+    description: create Pumba with multi-stage build
+    dockerfile: Dockerfile.ms
     working-directory: ${{main_clone}}
     image-name: pumba/builder
     build_arguments:
       - GH_USER=gaia-adm
       - GH_PROJECT=pumba
       - GH_SHA=${{CF_REVISION}}
-
-  go_pumba:
-    description: compile Pumba binary, using builder image
-    image: ${{go_builder}}
-    working-directory: ${{main_clone}}
-    commands:
-    - echo $PWD && mkdir -p dist/bin && export DIST=$PWD/dist/bin; echo $DIST && cd /go/src/github.com/gaia-adm/pumba && echo $PWD && echo $DIST && script/go_build.sh
-
-  package-pumba:
-    type: build
-    description: build Pumba into Docker container
-    dockerfile: Dockerfile.dist
-    working-directory: ${{main_clone}}/dist
-    image-name: pumba/pumba
-    tag: cf
